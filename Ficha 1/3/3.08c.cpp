@@ -12,6 +12,40 @@ int gcd(int n0, int n1){
     return n0;
 }
 
+void sumF(int &numerator, int &denominator, int numerator1, int denominator1){
+    int temp = denominator;
+    if (denominator == denominator1)
+        numerator += numerator1;
+    else{
+        numerator *= denominator1;
+        denominator *= denominator1;
+        numerator1 *= temp;
+        numerator += numerator1;
+        }
+}
+
+void subF(int &numerator, int &denominator, int numerator1, int denominator1){
+    int temp = denominator;
+    if (denominator == denominator1)
+        numerator -= numerator1;
+    else{
+        numerator *= denominator1;
+        denominator *= denominator1;
+        numerator1 *= temp;
+        numerator -= numerator1;
+        }
+}
+
+void multF(int &numerator, int &denominator, int numerator1, int denominator1){
+    numerator *= numerator1;
+    denominator *= denominator1;
+}
+
+void divF(int &numerator, int &denominator, int numerator1, int denominator1){
+    numerator *= denominator1;
+    denominator *= numerator1;
+}
+
 void reduceFraction(int &numerator, int &denominator){
     int g = gcd(numerator, denominator);
     while (g != 1){
@@ -50,35 +84,18 @@ int main() {
         else if (!readFraction(numerator1, denominator1))
             cout << "That's not a valid fraction";
         else{
-            int temp = denominator;
             switch(op){
                 case '+':
-                    if (denominator == denominator1)
-                        numerator += numerator1;
-                    else{
-                        numerator *= denominator1;
-                        denominator *= denominator1;
-                        numerator1 *= temp;
-                        numerator += numerator1;
-                    }
+                    sumF(numerator, denominator, numerator1, denominator1);
                     break;
                 case '-':
-                    if (denominator == denominator1)
-                        numerator -= numerator1;
-                    else{
-                        numerator *= denominator1;
-                        denominator *= denominator1;
-                        numerator1 *= temp;
-                        numerator -= numerator1;
-                    }
+                    subF(numerator, denominator, numerator1, denominator1);
                     break;
                 case '*':
-                    numerator *= numerator1;
-                    denominator *= denominator1;
+                    multF(numerator, denominator, numerator1, denominator1);
                     break;
                 case '/':
-                    numerator *= denominator1;
-                    denominator *= numerator1;
+                    divF(numerator, denominator, numerator1, denominator1);
                     break;
 
             }
