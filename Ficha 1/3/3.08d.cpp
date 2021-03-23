@@ -70,7 +70,7 @@ int main(){
     cin >> num;
     char c = '/';
     for (int i = 1; i <= num; i++){
-        srand(time(NULL) + rand());
+        srand(rand());
         int randOP = rand()%(4-1 + 1) + 1;
         int numerator = rand()%(100), denominator = rand()%(100), numerator1 = rand()%(100), denominator1 = rand()%(100);
         if (!readFraction(numerator, denominator)){
