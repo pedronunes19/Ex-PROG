@@ -2,13 +2,28 @@
 #include <vector>
 using namespace std;
 
+bool ascending(int x, int y){
+    if (x < y)
+        return true;
+    return false;
+}
+
+bool descending(int x, int y){
+    if (x > y)
+        return true;
+    return false;
+}
+
 void bubbleSort(vector<int> &v){
     bool lastSort;
     int iter = 0;
+    char order;
+    cout << "Ascending (a) or Descending(d)? ";
+    cin >> order;
     do{
         lastSort = true;
         for(int i = 0; i < v.size() - iter; i++){
-            if (v[i] > v[i+1]){
+            if ((!ascending(v[i], v[i+1]) && order == 'a')||(!descending(v[i], v[i+1]) && order == 'd')){
                 lastSort = false;
                 if (i+1 == v.size() - iter){
                     int temp = v[i];
