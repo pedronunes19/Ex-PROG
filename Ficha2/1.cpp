@@ -1,8 +1,10 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 class Date{
     public:
+        Date();
         Date(unsigned int year, unsigned int month,unsigned int day);
         Date(string yearMonthDay); // yearMonthDay must be in format "yyyy/mm/dd"
         void setYear(unsigned int year) ;
@@ -25,6 +27,15 @@ class Date{
         unsigned int day;
         unsigned int nDays(unsigned int year, unsigned int month) const;
 }; 
+
+Date::Date(){
+    time_t t = time(0); 
+    struct tm * timeStruct = localtime(&t);
+    year = timeStruct->tm_year + 1900;
+    month = timeStruct->tm_mon + 1;
+    day =timeStruct->tm_mday;
+
+}
 
 Date::Date(unsigned int year, unsigned int month, unsigned int day){
     this -> year = year;
@@ -171,6 +182,9 @@ int main() {
     cout << d1.isEqualTo(d2) << d1.isNotEqualTo(d2) << endl;
     cout << d1.isAfter(d2) << d1.isBefore(d2) << endl;
 
-    
+    Date d3;
+    d3.show();
+
+   
     return 0;
 }
